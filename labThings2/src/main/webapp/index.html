@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<h2 align="middle">intellij中使用 maven整合 SSH框架</h2>
+
+<a href="https://blog.csdn.net/sysushui/article/details/73722870?locationNum=11&fps=1#">csdn参考教程</a>
+<pre style="font-size: 20px">
+    <b>步骤：</b>
+    <img src="img/directory.jpg" alt="目录结构" align="right"/>
+    1.新建项目时选择maven项目，选择ssh框架模板工具包（archetypes）
+        但没有现成的官方SSH模板，可以创建一个空的再自行添加依赖并配置目录结构，内容详见
+        <a href="file://C:\Users\DELL\Desktop\code\labThings\labThings2\pom.xml">pom.xml</a>
+        在pom.xml中，可以看到，版本可以使用全局的properties标签统一配置
+    2.编写spring的配置文件
+        在src/main/resources下面建立两个文件，一个是applicationContext.xml，一个是db.properties;
+        <a href="file://C:\Users\DELL\Desktop\code\labThings\labThings2\src\main\resources\applicationContext.xml">applicationContext.xml</a>
+        在xml中使用<code>&lt;context:property-placeholder location="classpath:db.properties" /&gt;</code>可以阅读属性文件
+        点击configure application context后，项目中就自动添加了spring框架属性
+    3.连接数据库，并生成持久层代码
+        其中需要在projest structure中为项目添加hibernate属性，这样才会出现persistence界面
+        将session factory选为默认sessionFactory，即application context
+    4.现在项目比之前多了一个service层，
+</pre>
+
+
+</body>
+</html>
