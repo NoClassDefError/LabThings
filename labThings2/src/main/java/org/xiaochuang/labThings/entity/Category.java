@@ -1,18 +1,20 @@
 package org.xiaochuang.labThings.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
+@Table(name = "category")
 public class Category {
     private long id;
     private String name;
     private Long parentCategory;
     private String description;
     private Timestamp date;
+
+    private List<Things> things;
+    private List<Image> images;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -90,5 +92,25 @@ public class Category {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category")
+    public List<Things> getThings() {
+        return things;
+    }
+
+    public void setThings(List<Things> things) {
+        this.things = things;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId")
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

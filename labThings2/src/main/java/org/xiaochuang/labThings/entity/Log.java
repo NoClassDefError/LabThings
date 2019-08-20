@@ -1,17 +1,18 @@
 package org.xiaochuang.labThings.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
+@Table(name ="log")
 public class Log {
     private long id;
     private String content;
-    private Long thingId;
     private Timestamp date;
+
+    private Things things;
+    private List<Image> images;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -34,16 +35,6 @@ public class Log {
     }
 
     @Basic
-    @Column(name = "thingId", nullable = true)
-    public Long getThingId() {
-        return thingId;
-    }
-
-    public void setThingId(Long thingId) {
-        this.thingId = thingId;
-    }
-
-    @Basic
     @Column(name = "date", nullable = false)
     public Timestamp getDate() {
         return date;
@@ -62,7 +53,6 @@ public class Log {
 
         if (id != log.id) return false;
         if (content != null ? !content.equals(log.content) : log.content != null) return false;
-        if (thingId != null ? !thingId.equals(log.thingId) : log.thingId != null) return false;
         if (date != null ? !date.equals(log.date) : log.date != null) return false;
 
         return true;
@@ -72,8 +62,27 @@ public class Log {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (thingId != null ? thingId.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "thingId")
+    public Things getThings() {
+        return things;
+    }
+
+    public void setThings(Things things) {
+        this.things = things;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "imageId")
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <script>
+        var data = [{
+            title: '1 江西' //一级菜单
+            , children: [{
+                title: '2 南昌' //二级菜单
+                , children: [{
+                    title: '12 高新区', //三级菜单
+                    children:{}//…… //以此类推，可无限层级
+                }]
+            }]
+        }, {
+            title: '3 陕西' //一级菜单
+            , children: [{
+                title: '4 西安' //二级菜单
+            }]
+        }];
+
+        /**
+         * @return {boolean}
+         */
+        function IsJsonString(str) {
+            try {
+                var s=JSON.stringify(str);
+                JSON.parse(s);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         *
+         * @param son
+         * @param data json对象
+         * @param replacement
+         */
+        function replaceNode(son, data, replacement) {
+            for (var i in data) {
+                if (JSON.stringify(data[i].title).indexOf(son) !== -1) {
+                    console.log("replaced");
+                    data[i].children = replacement;
+                    return;
+                } else if(IsJsonString(data[i].children)) {
+                    replaceNode(son, data[i].children, replacement);
+                }
+            }
+        }
+
+        replaceNode("1 ", data, 700);
+        console.log(data);
+    </script>
+</head>
+<body>
+
+</div>
+</body>
+</html>
