@@ -20,7 +20,7 @@ public class ThingAction extends ActionSupport {
      * 前端传来物品类别data，返回它的子类
      */
     public String getSonCategory() {
-        if (data != null)
+        if (!data.isEmpty())
             service.sendResponse(ServletActionContext.getResponse(),
                     service.getJson(service.getCategoryById(data)));
         else service.sendResponse(ServletActionContext.getResponse(),

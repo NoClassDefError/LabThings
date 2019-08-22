@@ -1,7 +1,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/layui.css" media="all">
+    <link rel="stylesheet" href="script/css/layui.css" media="all">
 
     <!-- 使用的库有 jquery 与 layui-->
     <script src="script/jquery3.4.1.js"></script>
@@ -47,8 +47,8 @@
     </ul>
 
     <!--    边缘树状导航栏，由于数据格式是json，此处使用js进行处理操作，而不是jsp -->
-    <div class="layui-side layui-bg-gray">
-        <div class="layui-side-scroll">
+    <div class="layui-side layui-bg-gray" style="display: table;height: 100%;min-width: 200px">
+        <div class="layui-side-scroll" style="display: table-cell">
             <div id="test12" class="demo-tree-more"></div>
         </div>
     </div>
@@ -77,9 +77,11 @@
 
         </div>
         <!--        脚注-->
-        <div class="layui-footer footer footer-demo" style="text-align: center;height:unset;background-color: mintcream">
+        <div class="layui-footer footer footer-demo"
+             style="text-align: center;height:unset;background-color: mintcream">
             <div class="layui-main">
-                <p>© 2019 <a href="/">labThings.com</a> GNU Lisense</p><p>
+                <p>© 2019 <a href="/">labThings.com</a> GNU Lisense</p>
+                <p>
                     <a href="http://Macswelle@outlook.com" target="_blank">联系作者邮箱</a>
                     <a href="https://github.com/NoClassDefError/LabThings" target="_blank" rel="nofollow">GitHub</a>
                     <a href="" target="_blank">创新创业实验室</a>

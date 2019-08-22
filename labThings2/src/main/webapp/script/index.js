@@ -1,37 +1,33 @@
+var data = [];
+var layer;
+data.push({title: '', id: '', children: '', spread: true});//data的初值应当为空
 
-var data = {title:'root',children:null};//data的初值应当为空
-// var data = [{
-//     title: '1 江西' //一级菜单
-//     , children: [{
-//         title: '2 南昌' //二级菜单
-//         , children: [{
-//             title: '12 高新区', //三级菜单
-//             children: {}//…… //以此类推，可无限层级
-//         }]
-//     }]
-// }, {
-//     title: '3 陕西' //一级菜单
-//     , children: [{
-//         title: '4 西安' //二级菜单
-//     }]
-// }];
 
 /**
  *  category通信接口 前端向后台发送当前被点击的节点，后台查找并返回子节点的json后，
  *  前端将其拼接至原来的data内, data只增不减
- *  @param str 必须是字符串
+ *  @param str 必须是字符串格式，子节点的id号
  */
 function getData(str) {
     $.ajax({
-        url: "http://localhost:8080/labThings2_war_exploded/category.action",
-        data: str,
+        url: "http://localhost:8080/labThings2_Web_exploded/category.action",
+        data: {
+            data: str
+        },
+        header: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
         type: "POST",
-        dataType: "json",
         success: function (replacement) {
+            console.log(replacement);
+            console.log(JSON.parse(replacement));
             replaceNode(str, data, replacement);
         },
-        async: false
-    })
+        async: false,
+        error: function (e) {
+            layer.alert("没有子类了");
+        }
+    });
 }
 
 /**
@@ -52,9 +48,14 @@ function IsJsonString(str) {
  */
 function replaceNode(son, data, replacement) {
     for (var i in data) {
-        if (JSON.stringify(data[i].title).indexOf(son) !== -1) {
+        if (JSON.stringify(data[i].id) === "") {
+            data[i].children = JSON.parse(replacement);
+            return;
+        }
+        if (JSON.stringify(data[i].id).indexOf(son) !== -1) {
+            //data[i]的title属性中是否包含son，包含的话：
             console.log("replaced");
-            data[i].children = replacement;
+            data[i].children = JSON.parse(replacement);
             return;
         } else if (IsJsonString(data[i].children)) {
             replaceNode(son, data[i].children, replacement);
@@ -62,12 +63,7 @@ function replaceNode(son, data, replacement) {
     }
 }
 
-//使用layui库的通用格式，其中，layui.use()是加载对应模块的意思
-layui.use(['tree', 'util'], function () {
-    var tree = layui.tree;
-    var layer = layui.layer;
-    var util = layui.util;
-
+function reloadTree(tree) {
     //基本演示
     tree.render({
         elem: '#test12'
@@ -77,10 +73,21 @@ layui.use(['tree', 'util'], function () {
         , isJump: true //是否允许点击节点时弹出新窗口跳转
         , click: function (obj) {//节点被单击的事件处理
             var data = obj.data;  //获取当前点击的节点数据
-
-            layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
+            //getData('');
+            //console.log('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
+            console.log(data);
+            getData(data.id.toString());
+            reloadTree(tree);
         }
     });
+}
+
+//使用layui库的通用格式，其中，layui.use()是加载对应模块的意思
+layui.use(['tree', 'util', 'layer'], function () {
+    layer = layui.layer;
+    var tree = layui.tree;
+    var util = layui.util;
+    reloadTree(tree);
 
     //三个按钮的事件
     util.event('lay-demo', {

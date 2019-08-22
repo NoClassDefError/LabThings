@@ -1,7 +1,6 @@
 package org.xiaochuang.labThings.dao;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,11 +11,13 @@ import org.xiaochuang.labThings.entity.Category;
 import java.util.List;
 
 @Repository("BaseDao")
-public class BaseDao<T> extends HibernateDaoSupport{
+public class BaseDao<T> extends HibernateDaoSupport {
 
     @Autowired
     @Qualifier("sessionFactory")
-    private SessionFactory sessionFactory;
+    public void init(SessionFactory sessionFactory) {
+        super.setSessionFactory(sessionFactory);
+    }
 
     public void save(T t) {
         this.getHibernateTemplate().save(t);
@@ -27,7 +28,7 @@ public class BaseDao<T> extends HibernateDaoSupport{
     }
 
     public T findById(String id, Class<T> tClass) {
-        return this.getHibernateTemplate().get(tClass, id);
+        return this.getHibernateTemplate().get(tClass, Long.parseLong(id));
     }
 
     public void delete(T t) {
@@ -35,9 +36,17 @@ public class BaseDao<T> extends HibernateDaoSupport{
     }
 
     public List getSons(Category category) {
-        DetachedCriteria detachedCriteria = (DetachedCriteria) this.getSession().createCriteria(Category.class);
-        if (category == null) detachedCriteria.add(Restrictions.eq("parentCategory", null));
-        else detachedCriteria.add(Restrictions.eq("parentCategory", category.getId()));
-        return this.getHibernateTemplate().findByCriteria(detachedCriteria);
+        Session session = this.getSession();
+        Criteria criteria = session.createCriteria(Category.class);
+        List list;
+        if (category == null) {
+            Query query = session.createQuery("from Category where parentCategory is null");
+            //criteria.add(Restrictions.isEmpty("parentCategory"));
+            list = query.list();
+        } else {
+            criteria.add(Restrictions.eq("parentCategory", category.getId()));
+            list = criteria.list();
+        }
+        return list;
     }
 }

@@ -2,51 +2,35 @@
 <head>
     <meta charset="utf-8">
     <title>树组件</title>
-    <link rel="stylesheet" href="css/layui.css" media="all">
+    <link rel="stylesheet" href="script/css/layui.css" media="all">
 
     <!-- 使用的库有 jquery 与 layui-->
     <script src="script/jquery3.4.1.js"></script>
     <script src="script/layui.js"></script>
     <script type="text/javascript"></script>
+    <script>
+        console.log("clicked");
+        $.ajax({
+            url: "http://localhost:8080/labThings2_Web_exploded/category.action",
+            data: {
+                data: ""
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            type: "POST",
+            success: function (replacement) {
+                console.log(replacement);
+                //replaceNode(str, data, replacement);
+            },
+            async: false
+        });
+
+    </script>
 </head>
 <body>
-<ul class="layui-nav" lay-filter="">
-    <li class="layui-nav-item"><a href="">添加分类</a></li>
-    <li class="layui-nav-item layui-this"><a href="">添加物品</a></li>
-    <li class="layui-nav-item">
-        <a href="javascript:;">查看记录</a>
-        <dl class="layui-nav-child"> <!-- 二级菜单 -->
-            <dd><a href="">移动模块</a></dd>
-            <dd><a href="">后台模版</a></dd>
-            <dd><a href="">电商平台</a></dd>
-        </dl>
-    </li>
-    <li class="layui-nav-item"><a href="">社区</a></li>
-</ul>
-<div id="test1"></div>
-<script>
-    layui.use('tree', function () {
-        var tree = layui.tree;
 
-        //渲染
-        var inst1 = tree.render({
-            elem: document.getElementById('test1')  //绑定元素
-            , data: [{
-                title: '江西' //一级菜单
-                , children: [{
-                    title: '南昌' //二级菜单
-                    , children: [{
-                        title: '高新区' //三级菜单
-                        //…… //以此类推，可无限层级
-                    }]
-                }]
-            }, {
-                title: '陕西' //一级菜单
-                , children: [{
-                    title: '西安' //二级菜单
-                }]
-            }]
-        });
-    });
-</script>
+<button id="button">dianji</button>
+<div id="test1"></div>
+
 </body>

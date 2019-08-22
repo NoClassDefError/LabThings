@@ -26,9 +26,15 @@ public class CategoryService extends BaseService {
         StringBuilder sb = new StringBuilder("[");
         List list = dao.getSons(category);
         if (!list.isEmpty()) {
-            for (Object c : list)
-                sb.append("{title:'").append(((Category) c).getId()).append(' ')
-                        .append(((Category) c).getName()).append("',childeren:[]}");
+            for (Object c : list) {
+                Category cat = (Category) c;
+                sb.append("{\"title\":\"")
+                        .append(cat.getName())
+                        .append("\",\"id\":\"")
+                        .append(cat.getId())
+                        .append("\",\"children\":[],\"spread\":\"true\"},");
+            }
+            sb.deleteCharAt(sb.length()-1);//删去最后一个逗号
             return sb + "]";
         } else return null;
     }

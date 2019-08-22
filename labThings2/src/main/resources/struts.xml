@@ -5,12 +5,10 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <package name="struts-default" namespace="/">
+    <package name="default" extends="struts-default" namespace="/">
         <action name="category" class="org.xiaochuang.labThings.action.ThingAction" method="getSonCategory">
 
         </action>
-
-
     </package>
 
 </struts>
