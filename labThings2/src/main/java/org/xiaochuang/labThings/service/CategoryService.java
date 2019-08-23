@@ -1,6 +1,5 @@
 package org.xiaochuang.labThings.service;
 
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,12 @@ public class CategoryService extends BaseService {
     protected BaseDao<Category> dao;
 
     public Category getCategoryById(String id) {
-        return dao.findById(id, Category.class);
+        try {
+            return dao.findById(Long.parseLong(id), Category.class);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -34,7 +38,7 @@ public class CategoryService extends BaseService {
                         .append(cat.getId())
                         .append("\",\"children\":[],\"spread\":\"true\"},");
             }
-            sb.deleteCharAt(sb.length()-1);//删去最后一个逗号
+            sb.deleteCharAt(sb.length() - 1);//删去最后一个逗号
             return sb + "]";
         } else return null;
     }

@@ -66,7 +66,7 @@ public class Log {
         return result;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "thingId")
     public Things getThings() {
         return things;
@@ -76,7 +76,7 @@ public class Log {
         this.things = things;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "imageId")
     public List<Image> getImages() {
         return images;

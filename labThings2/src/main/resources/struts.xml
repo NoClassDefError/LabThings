@@ -6,8 +6,24 @@
 
 <struts>
     <package name="default" extends="struts-default" namespace="/">
-        <action name="category" class="org.xiaochuang.labThings.action.ThingAction" method="getSonCategory">
+        <action name="category" class="org.xiaochuang.labThings.action.CategoryAction" method="getSonCategory">
 
+        </action>
+        <action name="addThings" class="org.xiaochuang.labThings.action.ThingsAction" method="addThings">
+
+        </action>
+        <action name="getThings" class="org.xiaochuang.labThings.action.ThingsAction" method="getThingsById">
+            <result name="success" type="dispatcher">
+
+            </result>
+        </action>
+        <action name="getCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="getCategoryById">
+            <result name="success">
+                /index.jsp
+            </result>
+            <result name="error">
+                /index.jsp
+            </result>
         </action>
     </package>
 

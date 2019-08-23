@@ -1,10 +1,13 @@
 package org.xiaochuang.labThings.service;
 
+import org.xiaochuang.labThings.entity.Category;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class BaseService {
+public class BaseService<T> {
+
     public void sendResponse(HttpServletResponse response, String s) {
         try {
             response.setCharacterEncoding("utf-8");
@@ -17,4 +20,5 @@ public class BaseService {
             e.printStackTrace();
         }
     }
+
 }

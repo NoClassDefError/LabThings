@@ -7,11 +7,27 @@ import org.xiaochuang.labThings.dao.BaseDao;
 import org.xiaochuang.labThings.entity.Things;
 
 @Service("ThingsService")
-public class ThingsService {
+public class ThingsService extends BaseService {
 
     @Autowired
     @Qualifier("BaseDao")
     protected BaseDao<Things> dao;//泛型限定式依赖注入
 
+    /**
+     * 先查询，有则更改，无则保存
+     */
+    public boolean save(Things things) {
+        if (dao.findById(things.getThingId(), Things.class) == null) {
+            return dao.save(things);
+        } else return dao.update(things);
+    }
 
+    public Things getThingsById(String id) {
+        try {
+            return dao.findById(Long.parseLong(id), Things.class);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

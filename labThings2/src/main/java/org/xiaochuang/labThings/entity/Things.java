@@ -1,5 +1,8 @@
 package org.xiaochuang.labThings.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -93,8 +96,9 @@ public class Things {
         return result;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "thingId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Image> getImages() {
         return images;
     }
@@ -103,8 +107,9 @@ public class Things {
         this.images = images;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "thingId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Log> getLogs() {
         return logs;
     }
@@ -113,7 +118,7 @@ public class Things {
         this.logs = logs;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "category")
     public Category getCategoryEnt() {
         return categoryEnt;

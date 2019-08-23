@@ -43,7 +43,7 @@ public class Image {
         this.things = things;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "logId")
     public Log getLog() {
         return log;
@@ -53,7 +53,7 @@ public class Image {
         this.log = log;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "categoryId")
     public Category getCategory() {
         return category;
