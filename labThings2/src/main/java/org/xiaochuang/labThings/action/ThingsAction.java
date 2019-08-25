@@ -29,9 +29,8 @@ public class ThingsAction extends ActionSupport {
 
     public String getThingsById() {
         things = service.getThingsById(things.getThingId() + "");
-        if (things != null) service.sendResponse(ServletActionContext.getResponse(), "success");
-        else service.sendResponse(ServletActionContext.getResponse(), "not found");
-        return NONE;
+        if (things != null) return SUCCESS;
+        else return ERROR;
     }
 
     public Things getThings() {

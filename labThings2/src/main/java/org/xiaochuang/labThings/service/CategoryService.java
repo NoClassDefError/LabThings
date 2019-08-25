@@ -24,6 +24,29 @@ public class CategoryService extends BaseService {
     }
 
     /**
+     * 只更新对象中非关联的属性
+     */
+    public boolean saveOrUpdate(Category c) {
+        Category category = dao.findById(c.getId(), Category.class);
+        if (category == null) {
+            return dao.save(c);
+        } else {
+            //要先将c与category进行比对，将category的关联属性注入进c
+            c.setImages(category.getImages());
+            c.setThings(category.getThings());
+            return dao.update(c);
+        }
+    }
+
+    public boolean delete(Category c) {
+        Category category = dao.findById(c.getId(), Category.class);
+        if (category != null) {
+            dao.delete(category);
+            return true;
+        } else return false;
+    }
+
+    /**
      * 设法查询数据库中一个分类的叶子结点，根节点传入null
      */
     public String getJson(Category category) {

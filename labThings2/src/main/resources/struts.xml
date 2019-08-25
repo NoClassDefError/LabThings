@@ -14,10 +14,29 @@
         </action>
         <action name="getThings" class="org.xiaochuang.labThings.action.ThingsAction" method="getThingsById">
             <result name="success" type="dispatcher">
-
+                /index.jsp
+            </result>
+            <result name="error" type="dispatcher">
+                /index.jsp
             </result>
         </action>
         <action name="getCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="getCategoryById">
+            <result name="success">
+                /index.jsp
+            </result>
+            <result name="error">
+                /index.jsp
+            </result>
+        </action>
+        <action name="updateCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="update">
+            <result name="success">
+                /index.jsp
+            </result>
+            <result name="error">
+                /index.jsp
+            </result>
+        </action>
+        <action name="deleteCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="delete">
             <result name="success">
                 /index.jsp
             </result>

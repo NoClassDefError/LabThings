@@ -123,10 +123,16 @@ function replaceNode(son, data, replacement) {
     }
 }
 
+function clearTree() {
+    sessionStorage.clear();
+    data = [];
+    data.push({title: '物品分类树', id: '', children: '', spread: true});//data的初值应当为空
+}
+
 function reloadTree(tree) {
     var temp = sessionStorage.getItem('data');
     if (temp != null) {
-        console.log('sessionStorage: '+temp);
+        console.log('sessionStorage: ' + temp);
         data = JSON.parse(temp);
     }
     //基本演示
@@ -140,7 +146,7 @@ function reloadTree(tree) {
             var ndata = obj.data;  //获取当前点击的节点数据
             //getData('');
             //console.log('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
-            console.log(ndata);
+            console.log('ndata:' + ndata);
             getData(ndata.id.toString());
             sessionStorage.setItem('data', JSON.stringify(data));
             reloadTree(tree);

@@ -46,12 +46,22 @@ public class CategoryAction extends ActionSupport {
     /**
      * 获取该类下的物品
      */
-    public String getThings() {
-        Category category = service.getCategoryById(data);
-        if (category != null) {
-            list = category.getThings();
-            return SUCCESS;
-        } else return ERROR;
+//    public String getThings() {
+//        Category category = service.getCategoryById(data);
+//        if (category != null) {
+//            list = category.getThings();
+//            return SUCCESS;
+//        } else return ERROR;
+//    }
+    public String update() {
+        System.out.println(category.getId() + category.getName() + category.getDescription());
+        if (service.saveOrUpdate(category)) return SUCCESS;
+        else return ERROR;
+    }
+
+    public String delete() {
+        if (service.delete(category)) return SUCCESS;
+        else return ERROR;
     }
 
     public String getData() {

@@ -34,14 +34,16 @@ create table log
 drop table if exists image;
 create table image
 (
+    imageId   bigint primary key auto_increment,
     thingId    bigint,
     logId      bigint,
     categoryId bigint,
     url        varchar(100),
-    constraint fk_thingId foreign key (thingId) references things (thingId),
+    constraint fk_thing2Id foreign key (thingId) references things (thingId),
     constraint fk_logId foreign key (logId) references log (id),
     constraint fk_categoryId foreign key (categoryId) references category (id)
 ) comment '图片表';
 
 alter table image add imageId bigint primary key auto_increment;
+insert into image (categoryId,url) VALUES (21,'a');
 
