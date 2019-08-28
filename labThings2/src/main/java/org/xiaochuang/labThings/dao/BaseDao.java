@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.xiaochuang.labThings.entity.Category;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository("BaseDao")
 public class BaseDao<T> extends HibernateDaoSupport {
@@ -25,6 +26,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
             this.getHibernateTemplate().save(t);
             return true;
         } catch (DataAccessException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -59,5 +61,10 @@ public class BaseDao<T> extends HibernateDaoSupport {
             list = criteria.list();
         }
         return list;
+    }
+
+    public List<T> findAll(Class<T> tClass){
+        Criteria criteria = this.getSession().createCriteria(tClass);
+        return criteria.list();
     }
 }

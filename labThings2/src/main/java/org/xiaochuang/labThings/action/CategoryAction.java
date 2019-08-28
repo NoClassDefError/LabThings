@@ -1,5 +1,6 @@
 package org.xiaochuang.labThings.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,14 @@ public class CategoryAction extends ActionSupport {
     private List<Things> list;
 
     private Category category;
+
+    private int mode=0;
+
+    public String addCategory(){
+        mode=2;
+        ActionContext.getContext().getSession().put("service",service);
+        return SUCCESS;
+    }
 
     /**
      * 前端传来物品类别data，返回它的子类
@@ -55,6 +64,7 @@ public class CategoryAction extends ActionSupport {
 //    }
     public String update() {
         System.out.println(category.getId() + category.getName() + category.getDescription());
+        if (service.getCategoryById(category.getParentCategory() + "") == null) return ERROR;//检验父类id是否合格
         if (service.saveOrUpdate(category)) return SUCCESS;
         else return ERROR;
     }
@@ -86,5 +96,13 @@ public class CategoryAction extends ActionSupport {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }

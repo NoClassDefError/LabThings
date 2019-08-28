@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.xiaochuang.labThings.dao.BaseDao;
+import org.xiaochuang.labThings.entity.Category;
 import org.xiaochuang.labThings.entity.Things;
 
 @Service("ThingsService")
@@ -28,6 +29,17 @@ public class ThingsService extends BaseService {
         } catch (NumberFormatException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean saveOrUpdate(Things t) {
+        Things things = dao.findById(t.getThingId(), Things.class);
+        if (things == null) {
+            return dao.save(t);
+        } else {
+            t.setImages(things.getImages());
+            t.setLogs(things.getLogs());
+            return dao.update(t);
         }
     }
 }

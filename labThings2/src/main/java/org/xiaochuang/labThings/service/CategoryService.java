@@ -7,6 +7,7 @@ import org.xiaochuang.labThings.dao.BaseDao;
 import org.xiaochuang.labThings.entity.Category;
 
 import java.util.List;
+import java.util.Set;
 
 @Service("CategoryService")
 public class CategoryService extends BaseService {
@@ -23,6 +24,9 @@ public class CategoryService extends BaseService {
         }
     }
 
+    public List<Category> getCategories(){
+        return dao.findAll(Category.class);
+    }
     /**
      * 只更新对象中非关联的属性
      */

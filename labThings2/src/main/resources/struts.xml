@@ -9,8 +9,13 @@
         <action name="category" class="org.xiaochuang.labThings.action.CategoryAction" method="getSonCategory">
 
         </action>
-        <action name="addThings" class="org.xiaochuang.labThings.action.ThingsAction" method="addThings">
-
+        <action name="updateThings" class="org.xiaochuang.labThings.action.ThingsAction" method="update">
+            <result name="success" type="dispatcher">
+                /index.jsp
+            </result>
+            <result name="error" type="dispatcher">
+                /index.jsp
+            </result>
         </action>
         <action name="getThings" class="org.xiaochuang.labThings.action.ThingsAction" method="getThingsById">
             <result name="success" type="dispatcher">
@@ -41,6 +46,26 @@
                 /index.jsp
             </result>
             <result name="error">
+                /index.jsp
+            </result>
+        </action>
+        <action name="deleteLog" class="org.xiaochuang.labThings.action.LogAction" method="deleteLog">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+        <action name="addLog" class="org.xiaochuang.labThings.action.LogAction" method="addLog">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+        <action name="addThings" class="org.xiaochuang.labThings.action.ThingsAction" method="addThings">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+        <action name="addCat" class="org.xiaochuang.labThings.action.CategoryAction" method="addCategory">
+            <result name="success">
                 /index.jsp
             </result>
         </action>

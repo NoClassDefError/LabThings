@@ -181,6 +181,19 @@ layui.use(['tree', 'util', 'layer'], function () {
 
 });
 
+layui.use('carousel', function(){
+    var carousel = layui.carousel;
+    //建造实例
+    carousel.render({
+        elem: '#carousel'
+        ,width: '100%' //设置容器宽度
+        ,height:'90%'
+        ,arrow: 'always' //始终显示箭头
+        ,interval: '30000'
+        //,anim: 'updown' //切换动画方式
+    });
+});
+
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
 layui.use('element', function () {
     var element = layui.element;

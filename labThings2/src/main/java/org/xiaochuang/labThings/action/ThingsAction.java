@@ -15,16 +15,24 @@ public class ThingsAction extends ActionSupport {
     @Autowired
     @Qualifier("ThingsService")
     private ThingsService service;
+    @Autowired
+    @Qualifier("CategoryService")
+    private CategoryService categoryService;
 
     private Things things;//struts2模型驱动
+
+    private String catId;
+
+    private int mode = 0;//true为添加模式
 
     /**
      * 包含了更改功能
      */
     public String addThings() {
-        if (service.save(things)) service.sendResponse(ServletActionContext.getResponse(), "success");
-        else service.sendResponse(ServletActionContext.getResponse(), "error");
-        return NONE;
+        mode = 1;
+//        if (service.save(things)) service.sendResponse(ServletActionContext.getResponse(), "success");
+//        else service.sendResponse(ServletActionContext.getResponse(), "error");
+        return SUCCESS;
     }
 
     public String getThingsById() {
@@ -33,11 +41,38 @@ public class ThingsAction extends ActionSupport {
         else return ERROR;
     }
 
+    public String update() {
+        //System.out.println(things.getCategoryEnt().getId());
+        //通过catId查找category
+        Category category = categoryService.getCategoryById(catId);
+        if (category != null) {
+            things.setCategoryEnt(category);
+            if (service.saveOrUpdate(things)) return SUCCESS;
+            else return ERROR;
+        } else return ERROR;
+    }
+
     public Things getThings() {
         return things;
     }
 
     public void setThings(Things things) {
         this.things = things;
+    }
+
+    public String getCatId() {
+        return catId;
+    }
+
+    public void setCatId(String catId) {
+        this.catId = catId;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }
