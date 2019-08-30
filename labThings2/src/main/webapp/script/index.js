@@ -2,33 +2,6 @@ var data = [];
 var layer;
 data.push({title: '物品分类树', id: '', children: '', spread: true});//data的初值应当为空
 
-/**
- *  category通信接口 前端向后台发送当前被点击的节点，后台查找并返回子节点的json后，
- *  前端将其拼接至原来的data内, data只增不减
- *  @param str 必须是字符串格式，子节点的id号
- */
-function getData(str) {
-    $.ajax({
-        url: "http://localhost:8080/labThings2_Web_exploded/category.action",
-        data: {
-            data: str
-        },
-        header: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        type: "POST",
-        success: function (replacement) {
-            //console.log(replacement);
-            //console.log(JSON.parse(replacement));
-            replaceNode(str, data, replacement);
-        },
-        async: false,
-        error: function (e) {
-            layer.alert("没有子类了");
-        }
-    });
-}
-
 function getCategoryInfo(str) {
 
     if (str !== "") {

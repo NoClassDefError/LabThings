@@ -9,6 +9,35 @@
     <script src="script/jquery3.4.1.js"></script>
     <script src="script/layui.js"></script>
     <script src="script/index.js"></script>
+    <script>
+        /**
+         *  category通信接口 前端向后台发送当前被点击的节点，后台查找并返回子节点的json后，
+         *  前端将其拼接至原来的data内, data只增不减
+         *  @param str 必须是字符串格式，子节点的id号
+         */
+        function getData(str) {
+            $.ajax({
+                url: "<s:url value="category.action"/>",
+                data: {
+                    data: str
+                },
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                type: "POST",
+                success: function (replacement) {
+                    //console.log(replacement);
+                    //console.log(JSON.parse(replacement));
+                    replaceNode(str, data, replacement);
+                },
+                async: false,
+                error: function (e) {
+                    layer.alert("没有子类了");
+                }
+            });
+        }
+
+    </script>
     <title>物品管理系统</title>
 </head>
 <body>
