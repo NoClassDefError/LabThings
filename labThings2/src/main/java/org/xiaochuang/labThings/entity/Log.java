@@ -1,5 +1,8 @@
 package org.xiaochuang.labThings.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -76,8 +79,9 @@ public class Log {
         this.things = things;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "imageId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Image> getImages() {
         return images;
     }

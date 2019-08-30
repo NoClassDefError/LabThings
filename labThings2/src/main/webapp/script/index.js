@@ -200,3 +200,7 @@ layui.use('element', function () {
 
 
 });
+
+function search(){
+    $("#search").submit();
+}

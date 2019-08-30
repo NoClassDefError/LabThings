@@ -33,7 +33,7 @@ public class Image {
         this.imageId = imageId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name= "thingId")
     public Things getThings() {
         return things;
@@ -43,7 +43,7 @@ public class Image {
         this.things = things;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "logId")
     public Log getLog() {
         return log;
@@ -53,7 +53,7 @@ public class Image {
         this.log = log;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "categoryId")
     public Category getCategory() {
         return category;

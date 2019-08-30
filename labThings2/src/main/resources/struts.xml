@@ -6,6 +6,11 @@
 
 <struts>
     <package name="default" extends="struts-default" namespace="/">
+        <action name="index" class="org.xiaochuang.labThings.action.IndexAction" method="execute">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
         <action name="category" class="org.xiaochuang.labThings.action.CategoryAction" method="getSonCategory">
 
         </action>
@@ -65,6 +70,16 @@
             </result>
         </action>
         <action name="addCat" class="org.xiaochuang.labThings.action.CategoryAction" method="addCategory">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+        <action name="addImage" class="org.xiaochuang.labThings.action.ImageAction"  method="addImage">
+            <result name="success">
+                /index.jsp
+            </result>
+        </action>
+        <action name="deleteImage" class="org.xiaochuang.labThings.action.ImageAction" method="deleteImage">
             <result name="success">
                 /index.jsp
             </result>

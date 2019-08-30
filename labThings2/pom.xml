@@ -97,6 +97,12 @@
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts2.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
 
         <!-- 添加对数据库的支持 -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->

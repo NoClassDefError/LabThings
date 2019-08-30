@@ -1,4 +1,4 @@
-<%@ page pageEncoding="utf-8"%>
+<%@ page pageEncoding="utf-8" %>
 <script>
     var textField = "<div class=\"layui-form-item layui-form-text\">\n" +
         "    <label class=\"layui-form-label\">修改介绍</label>\n" +
@@ -91,17 +91,21 @@
     <%--                    image[0].url:<s:property value="category.images[0].url"/><br>--%>
     <%--                    image.url:<s:property value="#image.url"/><br>--%>
     <%--                    images:<s:property value="category.images"/><br>--%>
-    <a href="<s:property value="#image.url"/> "><s:property value="#image.url"/>
+    <a href="/root<s:property value="#image.url"/> "><s:property value="#image.url"/>
     </a><br>
+    <img class="layui-upload-img" src="/root<s:property value="#image.url"/>" style="width: 30%">
+    <form action="deleteImage.action" method="post">
+        <input type="hidden" name="image.imageId" value="<s:property value="#image.imageId"/>"/>
+        <button type="submit" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm">删除此图片</button>
+    </form><br>
 </s:iterator>
 <div class="layui-upload">
-    <button type="button" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm" id="test1">
-        上传图片
-    </button>
-    <div class="layui-upload-list">
-        <img class="layui-upload-img" id="demo1">
-        <p id="demoText"></p>
-    </div>
+    <form action="addImage.action" enctype="multipart/form-data" method="post">
+        <input name="imgFile" type="file">
+        <input type="hidden" value="1" name="mode"/>
+        <input type="hidden" value="<s:property value="category.id"/>" name="id"/>
+        <button type="submit" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm">上传图片</button>
+    </form>
 </div>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">

@@ -1,6 +1,9 @@
 package org.xiaochuang.labThings.dao;
 
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import org.xiaochuang.labThings.entity.Category;
 
 import java.util.List;
-import java.util.Set;
 
 @Repository("BaseDao")
 public class BaseDao<T> extends HibernateDaoSupport {
@@ -63,8 +65,15 @@ public class BaseDao<T> extends HibernateDaoSupport {
         return list;
     }
 
-    public List<T> findAll(Class<T> tClass){
+    public List<T> findAll(Class<T> tClass) {
         Criteria criteria = this.getSession().createCriteria(tClass);
         return criteria.list();
+    }
+
+    public long getMaxid() {
+        Object o = this.getSession().createSQLQuery("select max(imageId) from image").list().get(0);
+        if (o != null)
+            return Long.parseLong(o.toString());
+        else return 0;
     }
 }

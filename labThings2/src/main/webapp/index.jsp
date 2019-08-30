@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="script/css/layui.css" media="all">
-
     <!-- 使用的库有 jquery 与 layui-->
     <script src="script/jquery3.4.1.js"></script>
     <script src="script/layui.js"></script>
@@ -17,34 +16,47 @@
     <!--    顶部导航栏-->
     <ul class="layui-nav" lay-filter="">
         <li class="layui-nav-item layui-nav-title" style="font-size: 20px;font-family: sans-serif">
-            <a href="index.jsp" style="font-size: large;color: white">小创实验室物品管理系统</a>
+            <a href="<s:url action="index"/>" style="font-size: large;color: white">小创实验室物品管理系统</a>
         </li>
-        <li class="layui-nav-item"><a href="<s:url action="addCat"/>">添加分类</a></li>
-        <li class="layui-nav-item"><a href="<s:url action="addThings"/>">添加物品</a></li>
-        <li class="layui-nav-item">
-            <a href="javascript:">查看记录</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a href="">移动模块</a></dd>
-                <dd><a href="">后台模版</a></dd>
-                <dd><a href="">电商平台</a></dd>
+        <li class="layui-nav-item" style="z-index: 9999">
+            <a href="<s:url action="addCat"/>">添加分类</a>
+            <dl class="layui-nav-child">
+                <dd>
+                    <%@include file="addCat.jsp" %>
+                </dd>
             </dl>
         </li>
-        <li class="layui-nav-item" style="position: absolute;right: 20px;top:10px">
+        <li class="layui-nav-item" style="z-index: 9999">
+            <a href="<s:url action="addThings"/>">添加物品</a>
+            <dl class="layui-nav-child">
+                <dd>
+                    <%@include file="addthings.jsp" %>
+                </dd>
+            </dl>
+        </li>
+        <%--        <li class="layui-nav-item">--%>
+        <%--            <a href="javascript:">查看记录</a>--%>
+        <%--            <dl class="layui-nav-child"> <!-- 二级菜单 -->--%>
+        <%--                <dd><a href="">移动模块</a></dd>--%>
+        <%--                <dd><a href="">后台模版</a></dd>--%>
+        <%--                <dd><a href="">电商平台</a></dd>--%>
+        <%--            </dl>--%>
+        <%--        </li>--%>
+        <li class="layui-nav-item" style="position: absolute;right: 20px;top:10px;z-index: 9999">
             <div class="layui-form component" lay-filter="LAY-site-header-component">
-                <select lay-search="" lay-filter="component">
-                    <option value="">搜索物品或分类</option>
-                    <option value="element/layout.html">grid 栅格布局</option>
-                </select>
-                <div class="layui-form-select">
-                    <div class="layui-select-title">
-                        <input type="text" placeholder="搜索物品或分类" value="" class="layui-input">
-                        <i class="layui-edge"></i>
+                <form action="getCategory.action" method="post" id="search">
+                    <div class="layui-input-inline">
+                        <select name="catId" lay-verify="required" lay-search="">
+                            <option value="">搜索分类</option>
+                            <%--                在此视图上直接使用things对象中的service进行搜索--%>
+                            <s:iterator value="#session.categoryService.getCategories()" var="category">
+                                <option onclick="search()" value="<s:property value="#category.id"/>">
+                                    <s:property value="#category.name"/>
+                                </option>
+                            </s:iterator>
+                        </select>
                     </div>
-                    <dl class="layui-anim layui-anim-upbit">
-                        <dd lay-value="" class="layui-select-tips">搜索物品或分类</dd>
-
-                    </dl>
-                </div>
+                </form>
             </div>
         </li>
     </ul>
@@ -80,10 +92,10 @@
                 <input id="input1" type="text" name="data" value="1">
             </form>
             <s:if test="mode==1">
-                <%@include file="addthings.jsp"%>
+                <%@include file="addthings.jsp" %>
             </s:if>
             <s:elseif test="mode==2">
-                <%@include file="addCat.jsp"%>
+                <%@include file="addCat.jsp" %>
             </s:elseif>
             <s:elseif test="things==null && category==null">
                 <div class="layui-carousel" id="carousel">
@@ -96,10 +108,10 @@
                 </div>
             </s:elseif>
             <s:elseif test="things!=null && category==null">
-                <%@include file="things.jsp"%>
+                <%@include file="things.jsp" %>
             </s:elseif>
             <s:else>
-                <%@include file="category.jsp"%>
+                <%@include file="category.jsp" %>
             </s:else>
         </div>
         <!--        脚注-->

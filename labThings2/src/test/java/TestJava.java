@@ -1,3 +1,4 @@
+import org.apache.commons.io.IOUtils;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +8,10 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xiaochuang.labThings.entity.Category;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -25,4 +30,6 @@ public class TestJava extends HibernateDaoSupport {
 
         System.out.println("a: " + category.getName());
     }
+
+
 }

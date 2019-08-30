@@ -46,4 +46,4 @@ create table image
 
 alter table image add imageId bigint primary key auto_increment;
 insert into image (categoryId,url) VALUES (21,'a');
-
+select max(imageId) from image;

@@ -63,18 +63,27 @@
     </div>
     <button type="submit" class="layui-btn layui-btn-primary layui-btn-radius">保存修改</button>
 </form>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>物品图片</legend>
+</fieldset>
 <s:iterator value="category.images" var="image">
-    <a href="<s:property value="#image.url"/> "><s:property value="#image.url"/>
+    <a href="/root/<s:property value="#image.url"/> "><s:property value="#image.url"/>
     </a><br>
+    <img class="layui-upload-img" src="${pageContext.request.contextPath}<s:property value="#image.url"/>">
+    <form action="deleteImage.action" method="post">
+        <input type="hidden" name="image.imageId" value="<s:property value="#image.imageId"/>"/>
+        <button type="submit" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm">删除此图片</button>
+    </form><br>
 </s:iterator>
 <div class="layui-upload">
-    <button type="button" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm" id="test1">
-        上传图片
-    </button>
-    <div class="layui-upload-list">
-        <img class="layui-upload-img" id="demo1">
-        <p id="demoText"></p>
-    </div>
+    <form action="addImage.action" enctype="multipart/form-data" method="post">
+        <input name="imgFile" type="file">
+        <input type="hidden" value="0" name="mode"/>
+        <input type="hidden" value="<s:property value="things.thingId"/>" name="id"/>
+        <button type="submit" class="layui-btn layui-btn-primary layui-btn-radius layui-btn-sm">
+            上传图片
+        </button>
+    </form>
 </div>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>该物品的日志记录</legend>

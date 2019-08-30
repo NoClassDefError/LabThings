@@ -15,10 +15,7 @@
                 <select name="category.parentCategory" lay-verify="required" lay-search="">
                     <option value="">直接选择或搜索选择</option>
                     <%--                在此视图上直接使用things对象中的service进行搜索--%>
-                    <%
-                        ActionContext.getContext().getValueStack().set("service",session.getAttribute("service"));
-                    %>
-                    <s:iterator value="service.getCategories()" var="category">
+                    <s:iterator value="session.service.getCategories()" var="category">
                         <option name="category.parentCategory" value="<s:property value="#category.id"/>">
                             <s:property value="#category.name"/>
                         </option>
