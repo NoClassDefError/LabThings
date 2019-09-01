@@ -14,8 +14,7 @@ public class IndexAction extends ActionSupport {
     private CategoryService service;
 
     public String execute() {
-        ActionContext.getContext().getSession().put("categoryService", service);
-        ActionContext.getContext().getSession().put("service", service);
+        ActionContext.getContext().getSession().put("list",service.getCategories());
 //        if (service.save(things)) service.sendResponse(ServletActionContext.getResponse(), "success");
 //        else service.sendResponse(ServletActionContext.getResponse(), "error");
         return SUCCESS;

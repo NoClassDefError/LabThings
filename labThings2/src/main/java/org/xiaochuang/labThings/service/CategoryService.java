@@ -25,6 +25,7 @@ public class CategoryService extends BaseService {
     }
 
     public List<Category> getCategories(){
+//        System.out.println("finding Categories");
         return dao.findAll(Category.class);
     }
     /**

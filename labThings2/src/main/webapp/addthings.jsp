@@ -11,11 +11,11 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">搜索类别</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-block">
                 <select name="catId" lay-verify="required" lay-search="">
                     <option value="">直接选择或搜索选择</option>
                     <%--                在此视图上直接使用things对象中的service进行搜索--%>
-                    <s:iterator value="#session.categoryService.getCategories()" var="category">
+                    <s:iterator value="#session.list" var="category">
                         <option value="<s:property value="#category.id"/>">
                             <s:property value="#category.name"/>
                         </option>

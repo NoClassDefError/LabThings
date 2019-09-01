@@ -6,13 +6,24 @@
 
 <struts>
     <package name="default" extends="struts-default" namespace="/">
+        <interceptors>
+            <interceptor name="myInterceptor" class="org.xiaochuang.labThings.action.MyInterceptor"/>
+            <interceptor-stack name="mystack">
+                <interceptor-ref name="myInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
         <action name="index" class="org.xiaochuang.labThings.action.IndexAction" method="execute">
             <result name="success">
                 /index.jsp
             </result>
+            <result name="error" type="dispatcher">
+                /index.jsp
+            </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="category" class="org.xiaochuang.labThings.action.CategoryAction" method="getSonCategory">
-
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="updateThings" class="org.xiaochuang.labThings.action.ThingsAction" method="update">
             <result name="success" type="dispatcher">
@@ -21,6 +32,7 @@
             <result name="error" type="dispatcher">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="getThings" class="org.xiaochuang.labThings.action.ThingsAction" method="getThingsById">
             <result name="success" type="dispatcher">
@@ -29,6 +41,7 @@
             <result name="error" type="dispatcher">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="getCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="getCategoryById">
             <result name="success">
@@ -37,6 +50,7 @@
             <result name="error">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="updateCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="update">
             <result name="success">
@@ -45,6 +59,7 @@
             <result name="error">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="deleteCategory" class="org.xiaochuang.labThings.action.CategoryAction" method="delete">
             <result name="success">
@@ -53,36 +68,43 @@
             <result name="error">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="deleteLog" class="org.xiaochuang.labThings.action.LogAction" method="deleteLog">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="addLog" class="org.xiaochuang.labThings.action.LogAction" method="addLog">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="addThings" class="org.xiaochuang.labThings.action.ThingsAction" method="addThings">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="addCat" class="org.xiaochuang.labThings.action.CategoryAction" method="addCategory">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="addImage" class="org.xiaochuang.labThings.action.ImageAction"  method="addImage">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
         <action name="deleteImage" class="org.xiaochuang.labThings.action.ImageAction" method="deleteImage">
             <result name="success">
                 /index.jsp
             </result>
+            <interceptor-ref name="mystack"/>
         </action>
     </package>
 

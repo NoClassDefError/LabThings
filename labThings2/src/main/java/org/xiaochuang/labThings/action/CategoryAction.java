@@ -29,7 +29,6 @@ public class CategoryAction extends ActionSupport {
 
     public String addCategory(){
         mode=2;
-        ActionContext.getContext().getSession().put("service",service);
         return SUCCESS;
     }
 
@@ -37,6 +36,7 @@ public class CategoryAction extends ActionSupport {
      * 前端传来物品类别data，返回它的子类
      */
     public String getSonCategory() {
+
         if (!data.isEmpty())
             service.sendResponse(ServletActionContext.getResponse(),
                     service.getJson(service.getCategoryById(data)));
@@ -65,7 +65,11 @@ public class CategoryAction extends ActionSupport {
     public String update() {
         System.out.println(category.getId() + category.getName() + category.getDescription());
         if (service.getCategoryById(category.getParentCategory() + "") == null) return ERROR;//检验父类id是否合格
-        if (service.saveOrUpdate(category)) return SUCCESS;
+        if (service.saveOrUpdate(category)) {
+            ActionContext.getContext().getSession().clear();
+            ActionContext.getContext().getSession().put("list",service.getCategories());
+            return SUCCESS;
+        }
         else return ERROR;
     }
 

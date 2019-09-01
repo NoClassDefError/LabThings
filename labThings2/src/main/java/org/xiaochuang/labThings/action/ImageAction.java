@@ -72,6 +72,7 @@ public class ImageAction extends ActionSupport {
             file.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             IOUtils.copy(new FileInputStream(imgFile), fileOutputStream);
+            fileOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
             return ERROR;

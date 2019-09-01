@@ -78,7 +78,7 @@
                         <select name="catId" lay-verify="required" lay-search="">
                             <option value="">搜索分类</option>
                             <%--                在此视图上直接使用things对象中的service进行搜索--%>
-                            <s:iterator value="#session.categoryService.getCategories()" var="category">
+                            <s:iterator value="#session.list" var="category">
                                 <option onclick="search()" value="<s:property value="#category.id"/>">
                                     <s:property value="#category.name"/>
                                 </option>

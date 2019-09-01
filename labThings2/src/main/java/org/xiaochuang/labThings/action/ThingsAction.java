@@ -31,7 +31,7 @@ public class ThingsAction extends ActionSupport {
      */
     public String addThings() {
         mode = 1;
-        ActionContext.getContext().getSession().put("categoryService", categoryService);
+        //ActionContext.getContext().getSession().put("categoryService", categoryService);
 //        if (service.save(things)) service.sendResponse(ServletActionContext.getResponse(), "success");
 //        else service.sendResponse(ServletActionContext.getResponse(), "error");
         return SUCCESS;
