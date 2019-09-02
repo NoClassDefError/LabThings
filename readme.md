@@ -12,4 +12,4 @@ web框架对应main/webapp/WEB-INF/web.xml，spring和struts2的配置文件inte
 8.点击启动就能看到网页了，点击左边的物品分类树可以展开
 
 项目结构：
-![img](https://github.com/NoClassDefError/LabThings/a.png)
+![img](https://github.com/NoClassDefError/LabThings/blob/master/a.png)
